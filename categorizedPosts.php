@@ -3,9 +3,10 @@
 <!-- Bootstrap Elements : https://bootswatch.com/lux/ -->
 <?php
     require('./config/db.php');     //Establishing database connection
+    $category = mysqli_real_escape_string($conn, $_GET['category']);
     require('./config/insert.php');     //invoking logic to submit user email for newsletter subscriptions
     
-    //For pagination:
+    // For pagination:
     //get page number
     if (!isset ($_GET['page']) ) {  
         $page = 1;  
@@ -17,10 +18,13 @@
 
     $page_first_result = ($page-1) * $posts_per_page;
 
+    //get category
+    $category = str_replace("_"," & ",mysqli_real_escape_string($conn, $_GET['category']));
     //Create query
-    $query_allPosts = 'select count(*) from article where article_status = 1';
-    $query_paginatedPosts = 'select * from article where article_status = 1 order by article_id desc limit '.$page_first_result.','.$posts_per_page;
+    $query_allPosts = "select count(*) from article where article_category="."'".$category."' and article_status = 1";
+    $query_paginatedPosts = "select * from article where article_category="."'".$category."' and article_status = 1"." order by article_id desc limit ".$page_first_result.",".$posts_per_page;
     $query_allCategories = "select distinct article_category from article order by article_category";
+    
 
     //get results
     $results_all = mysqli_query($conn,$query_allPosts);
@@ -30,9 +34,11 @@
     //finding number of pages
     $num_posts = mysqli_fetch_assoc($results_all);
     $num_pages = ceil($num_posts["count(*)"] / $posts_per_page);
+  
     //fetch data
     $posts = mysqli_fetch_all($results_paginated,MYSQLI_ASSOC);
     $allCategories = mysqli_fetch_all($results_allCategories,MYSQLI_ASSOC);
+    
     //free results
     mysqli_free_result($results_all);
     mysqli_free_result($results_paginated);
@@ -47,6 +53,7 @@
     <link rel="stylesheet" href="css/main.css">
     <script src="https://kit.fontawesome.com/dce8876dde.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://bootswatch.com/5/lux/bootstrap.css">
+
     <title>XYZ News Portal</title>
 </head>
 <body>
@@ -59,24 +66,32 @@
                     <h4 class="text-muted">For those who read</h4>
                 </div>
             </a>
+            
             <!-- Dynamic Navbar : Having all the categories of news articles -->
             <div class="container-md">
                 <ul class="nav nav-pills justify-content-center">
                     <li class="nav-item">
-                    <a class="nav-link active" href="index.php">Latest</a>
+                    <a class="nav-link" href="index.php">Latest</a>
                     </li>
                     <?php foreach($allCategories as $cat): ?>
+                    <?php if($category==$cat['article_category']) :?>
+                        <li class="nav-item">
+                        <a class="nav-link active" href="categorizedPosts.php?category=<?php echo $cat['article_category']; ?>"><?php echo $cat['article_category']; ?></a>
+                        </li>
+                    <?php endif; ?>
+                    <?php if($category!=$cat['article_category']) :?>
                         <li class="nav-item">
                         <a class="nav-link" href="categorizedPosts.php?category=<?php echo str_replace(" & ","_",$cat['article_category']); ?>"><?php echo $cat['article_category']; ?></a>
                         </li>
-                    <?php endforeach; ?> 
+                    <?php endif; ?>
+                    <?php endforeach; ?>     
                 </ul>
             </div>
         </div>
     </div>
     <!-- Main container -->
     <div class="main-content container-lg-12 mx-0">
-        <h1 class="mx-2 pt-3">Latest News articles</h1>
+        <h1 class="mx-2 pt-3">Latest <?php echo $category; ?> News articles</h1>
         <div class="container-lg-12 main-container mx-0">
             <div class="row mx-0 my-3">
                 <!-- Div for News articles display -->
@@ -140,12 +155,11 @@
                             </div>
                         </div>
                         <?php endif; ?>
-                        <?php endforeach; ?>    
+                        <?php endforeach; ?>     
                     </div>
                 </div>
                 <!-- Side panel -->
                 <div class="col-sm-4 mx-auto">
-                    <!-- textbox for subscribing to newsletters -->
                     <div class=" border border-secondary p-2 my-5">
                         <h4 class="text-center">Subscribe to our updates</h4>
                         <form action="<?php $_SERVER['PHP_SELF'];?>" class="form-group mx-5" method="post">
@@ -198,7 +212,7 @@
                                 $search_query = "Select * from article where article_title like 'xxxx'";
                             // if search box is filled then use that value to match the news articles titles
                             else{
-                                $search_query = "Select * from article where (article_title like '%".$_POST['search']."%' or article_category like '%".$_POST['search']."%' or article_desc like '%".$_POST['search']."%' and article_status = 1) order by article_id desc";   
+                                $search_query = "Select * from article where (article_title like '%".$_POST['search']."%' or article_category like '%".$_POST['search']."%' or article_desc like '%".$_POST['search']."%' and article_status = 1) order by article_id desc";  
                             }
                             $search_result = mysqli_query($conn,$search_query);
                             $matched_news = mysqli_fetch_all($search_result,MYSQLI_ASSOC);
@@ -215,23 +229,23 @@
                         <?php 
                         $prev = $page - 1;
                             if($page == 1)
-                                echo '<li class="page-item disabled"><a class="page-link" href="?page='.$prev.'">&laquo;</a></li>';
+                                echo '<li class="page-item disabled"><a class="page-link" href="?page='.$prev.'&category='.$category.'">&laquo;</a></li>';
                             else
-                                echo '<li class="page-item"><a class="page-link" href="?page='.$prev.'">&laquo;</a></li>';
+                                echo '<li class="page-item"><a class="page-link" href="?page='.$prev.'&category='.$category.'">&laquo;</a></li>';
 
                             for($i=1;$i<=$num_pages;$i++){
                                 if($i == $page){
-                                    echo '<li class="page-item active"><a class="page-link" href="?page='.$i.'">'.$i.'</a></li>';
+                                    echo '<li class="page-item active"><a class="page-link" href="?page='.$i.'&category='.$category.'">'.$i.'</a></li>';
                                 }
                                 else{
-                                    echo '<li class="page-item"><a class="page-link" href="?page='.$i.'">'.$i.'</a></li>';
+                                    echo '<li class="page-item"><a class="page-link" href="?page='.$i.'&category='.$category.'">'.$i.'</a></li>';
                                 }
                             }
                             $next = $page + 1;
                             if($page == $num_pages)
-                                echo '<li class="page-item disabled"><a class="page-link" href="?page='.$next.'">&raquo;</a></li>';
+                                echo '<li class="page-item disabled"><a class="page-link" href="?page='.$next.'&category='.$category.'">&raquo;</a></li>';
                             else
-                                echo '<li class="page-item"><a class="page-link" href="?page='.$next.'">&raquo;</a></li>';
+                                echo '<li class="page-item"><a class="page-link" href="?page='.$next.'&category='.$category.'">&raquo;</a></li>';
 
                         ?>
                     </ul>

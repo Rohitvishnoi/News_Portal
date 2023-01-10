@@ -1,0 +1,287 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sql_fill module &mdash; Google News Parser 1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Google News Parser 1 documentation" href="index.html"/>
+        <link rel="up" title="create_sphinx" href="modules.html"/>
+        <link rel="next" title="thehindu module" href="thehindu.html"/>
+        <link rel="prev" title="parse_class module" href="parse_class.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Google News Parser
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">create_sphinx</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="economictimes.html">economictimes module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="google_news_parser.html">google_news_parser module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="india_com.html">india_com module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="news18.html">news18 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parse_class.html">parse_class module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">sql_fill module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="thehindu.html">thehindu module</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Google News Parser</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="modules.html">create_sphinx</a> &raquo;</li>
+      
+    <li>sql_fill module</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/sql_fill.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-sql_fill">
+<span id="sql-fill-module"></span><h1>sql_fill module<a class="headerlink" href="#module-sql_fill" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="sql_fill.sql_fill">
+<em class="property">class </em><code class="descclassname">sql_fill.</code><code class="descname">sql_fill</code><span class="sig-paren">(</span><em>user_n</em>, <em>password</em>, <em>database_n</em><span class="sig-paren">)</span><a class="headerlink" href="#sql_fill.sql_fill" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>This class establishes SQL connection and
+contains functions to upload and fetch data
+from SQL database</p>
+<dl class="method">
+<dt id="sql_fill.sql_fill.__del__">
+<code class="descname">__del__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sql_fill.sql_fill.__del__" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is a destructor class
+which closes the connection to the
+database</p>
+<blockquote>
+<div><p>None</p>
+<p>None</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="sql_fill.sql_fill.send_email">
+<code class="descname">send_email</code><span class="sig-paren">(</span><em>subject</em>, <em>description</em><span class="sig-paren">)</span><a class="headerlink" href="#sql_fill.sql_fill.send_email" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function sends email to all the
+subscribers</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>subject</strong> (<em>String</em>) &#8211; This is subject of the article/email</li>
+<li><strong>description</strong> (<em>String</em>) &#8211; This is the description of the article</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="sql_fill.sql_fill.store_article">
+<code class="descname">store_article</code><span class="sig-paren">(</span><em>image</em>, <em>subject</em>, <em>category</em>, <em>description</em>, <em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#sql_fill.sql_fill.store_article" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function inserts new content into database</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>image</strong> (<em>String</em>) &#8211; This is the path to image in the article</li>
+<li><strong>subject</strong> (<em>String</em>) &#8211; This is the title of the article</li>
+<li><strong>category</strong> (<em>String</em>) &#8211; This is the category of the article</li>
+<li><strong>description</strong> (<em>String</em>) &#8211; This is the desription of the article</li>
+<li><strong>id</strong> (<em>String</em>) &#8211; This is the of the admin inserting the article</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="thehindu.html" class="btn btn-neutral float-right" title="thehindu module" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="parse_class.html" class="btn btn-neutral" title="parse_class module" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2021, Aniruddha Joshi.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
